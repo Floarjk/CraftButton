@@ -1,0 +1,8 @@
+## Interface: 120000
+## Title: Craft Button
+## Version: 1.0.0
+## Author: Floar
+## Notes: Quick craft button for enchanting recipes
+## SavedVariables: CraftButtonDB
+
+CraftButton.lua
