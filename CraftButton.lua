@@ -485,50 +485,6 @@ local function createCraftButton()
     makeButton("WristAvoidanceBtn", "Wrist Avoid", 2, 4, RECIPE_WRIST_AVOIDANCE, ReagentWrist)
     makeButton("WristSpeedBtn", "Wrist Speed", 2, 5, RECIPE_WRIST_SPEED, ReagentWrist)
 
-    -- If none of the tracked recipes are known, hide the frame (they'll appear gray/disabled)
-    do
-        local recipeIDs = {
-            RECIPE_RADIANT_POWER,
-            RECIPE_MASTERY,
-            RECIPE_CRIT,
-            RECIPE_HASTE,
-            RECIPE_VERSA,
-            RECIPE_WINGED_GRACE,
-            RECIPE_LEECHING_FANGS,
-            RECIPE_RING_CRIT,
-            RECIPE_RING_HASTE,
-            RECIPE_RING_MASTERY,
-            RECIPE_RING_VERSA,
-            RECIPE_DEFENDERS_MARCH,
-            RECIPE_WRIST_LEECH,
-            RECIPE_WRIST_AVOIDANCE,
-            RECIPE_WRIST_SPEED,
-        }
-        local anyKnown = false
-        if C_TradeSkillUI and C_TradeSkillUI.GetRecipeInfo then
-            for _, rid in ipairs(recipeIDs) do
-                local info = C_TradeSkillUI.GetRecipeInfo(rid)
-                if info then
-                    if type(info) == "table" then
-                        if info.learned ~= nil then
-                            if info.learned then anyKnown = true end
-                        elseif info.isLearned ~= nil then
-                            if info.isLearned then anyKnown = true end
-                        else
-                            anyKnown = true
-                        end
-                    else
-                        anyKnown = true
-                    end
-                end
-                if anyKnown then break end
-            end
-        end
-        if not anyKnown then
-            frame:Hide()
-        end
-    end
-
     return frame
 end
 
@@ -621,3 +577,4 @@ SlashCmdList["CRAFTBUTTON"] = function(msg)
     local filteredReagents = filterReagents(reagents, useFramework)
     performCraft(recipeID, amount, filteredReagents, displayName)
 end
+
